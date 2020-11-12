@@ -2,7 +2,6 @@
   "name": "mern-ecommerce",
   "version": "1.0.0",
   "description": "MERN Ecommerce",
-  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node -r esm backend/server.js",
@@ -19,6 +18,7 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.10.13"
   },
   "devDependencies": {
