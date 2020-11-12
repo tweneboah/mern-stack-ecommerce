@@ -20,7 +20,10 @@ productRoutes.get(
     if (product) {
       res.json(product);
     } else {
-      res.status(404).json({ message: 'Product Not Found' });
+      res.status(404); //You can ignore this and it will set to 500 bease on our configuration inside our error handler middleware
+
+      //Since we have our custom middleware we can pass our own error to the error handler because we are making use of express-async-handler
+      throw new Error('Product Not found');
     }
   })
 );
