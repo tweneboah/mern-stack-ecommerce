@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import dbConnect from './config/db';
-import products from './data/products';
+import dbConnect from './config/db.js';
+import products from './data/products.js';
 
 dotenv.config();
 dbConnect();

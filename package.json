@@ -2,16 +2,20 @@
   "name": "mern-ecommerce",
   "version": "1.0.0",
   "description": "MERN Ecommerce",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node -r esm backend/server.js",
     "server": "nodemon -r esm backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \" npm run client\" "
+    "dev": "concurrently \"npm run server\" \" npm run client\" ",
+    "data:import": "node backend/seeder.js",
+    "data:destroy": "node backend/seeder.js -d"
   },
   "author": "Emmanuel Tweneboah",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
