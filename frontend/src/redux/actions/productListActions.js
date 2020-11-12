@@ -5,7 +5,7 @@ const {
   PRODUCT_LIST_FAIL,
 } = require('../actionTypes/productActionTypes');
 
-export const listProductActions = () => {
+export const productListActions = () => {
   return async dispatch => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
