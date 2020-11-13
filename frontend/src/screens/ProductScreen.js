@@ -16,7 +16,7 @@ import { productDetailsActions } from '../redux/actions/productListActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(0);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,7 +25,12 @@ const ProductScreen = ({ match }) => {
 
   const productDetails = useSelector(state => state.productDetails);
   const { loading, product, error } = productDetails;
-  console.log(productDetails);
+
+  //This will send to cart page but it will send the product id and qty as a query params
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
+
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
@@ -108,6 +113,7 @@ const ProductScreen = ({ match }) => {
 
               <ListGroup.Item>
                 <Button
+                  onClick={addToCartHandler}
                   className='btn-block'
                   type='button'
                   disabled={product.countInStock === 0}>

@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 const App = () => {
   return (
@@ -14,6 +15,8 @@ const App = () => {
         <main className='py-3'>
           <Container>
             <Route exact path='/' component={HomeScreen} />
+            {/* /cart/:id? means the id is optional */}
+            <Route exact path='/cart/:id?' component={CartScreen} />
             <Route exact path='/product/:id' component={ProductScreen} />
           </Container>
         </main>
