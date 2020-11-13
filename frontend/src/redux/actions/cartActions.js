@@ -6,7 +6,7 @@ import { CART_ADD_ITEM } from '../actionTypes/cartActionTypes';
 //This will make request to the backend and fetch the data
 //We will need the qty and id of the product but lucky to use on our frontend we pass that as a query string
 
-export const addToCart = async (id, qty) => {
+export const addToCart = (id, qty) => {
   //The second argument we pass to dispatch contains all the data in our store
 
   return async (dispatch, getState) => {
