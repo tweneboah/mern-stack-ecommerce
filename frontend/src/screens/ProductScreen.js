@@ -85,24 +85,26 @@ const ProductScreen = ({ match }) => {
               </ListGroup>
 
               {/* Select qty */}
-              <ListGroup.Item>
-                <Row>
-                  <Col>Quantity</Col>
-                  <Col>
-                    <Form.Control
-                      as='select'
-                      value={qty}
-                      onChange={e => setQty(e.target.value)}>
-                      {/* This will [...Array(product.countInStock).keys()] output 0,1,2,3 if the value is 4 */}
-                      {[...Array(product.countInStock).keys()].map(x => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
+              {product.countInStock > 0 && (
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Quantity</Col>
+                    <Col>
+                      <Form.Control
+                        as='select'
+                        value={qty}
+                        onChange={e => setQty(e.target.value)}>
+                        {/* This will [...Array(product.countInStock).keys()] output 0,1,2,3 if the value is 4 */}
+                        {[...Array(product.countInStock).keys()].map(x => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
 
               <ListGroup.Item>
                 <Button
