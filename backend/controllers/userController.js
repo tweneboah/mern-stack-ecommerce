@@ -3,6 +3,37 @@ import User from '../models/userModel';
 import generateToken from '../utils/generateToken';
 
 //Get all Products
+const registerUser = asyncHandler(async (req, res) => {
+  const { email, password, name } = req.body;
+
+  const userRxist = await User.findOne({ email });
+  if (userRxist) {
+    res.status(400);
+    throw new Error('User already exist');
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
+});
+
+//Get all Products
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -40,4 +71,4 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile };
+export { authUser, getUserProfile, registerUser };
