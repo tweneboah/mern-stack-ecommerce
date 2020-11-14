@@ -10,7 +10,7 @@ import {
   Card,
   Image,
 } from 'react-bootstrap';
-import { addToCart } from '../redux/actions/cartActions';
+import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 import Message from '../components/Message';
 
 //We need the id from match.params.id;
@@ -30,8 +30,13 @@ const CartScreen = ({ match, location, history }) => {
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
 
-  //checkout
+  //Remove cart item
 
+  const removeFromCartHandler = id => {
+    dispatch(removeFromCart(id));
+  };
+
+  //checkout
   const checkoutHandler = () => {
     //redirect to login if it has a queryString of shipping
     history.push('/login?redirect=shipping'); //This means if not login it will take you to login otherwise redirect to shipping
@@ -78,7 +83,10 @@ const CartScreen = ({ match, location, history }) => {
                     </Form.Control>
                   </Col>
                   <Col md={2}>
-                    <Button variant='danger' type='button'>
+                    <Button
+                      variant='danger'
+                      type='button'
+                      onClick={() => removeFromCartHandler(item.product)}>
                       remove
                     </Button>
                   </Col>

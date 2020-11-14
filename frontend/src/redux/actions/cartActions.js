@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-import { CART_ADD_ITEM } from '../actionTypes/cartActionTypes';
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+} from '../actionTypes/cartActionTypes';
 
 //The logic
 //This will make request to the backend and fetch the data
@@ -29,5 +32,15 @@ export const addToCart = (id, qty) => {
     );
 
     //Then we will get it from our store by getting it from localstorage and put pass it to the store as an initial state
+  };
+};
+
+export const removeFromCart = id => {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: CART_REMOVE_ITEM,
+      payload: id,
+    });
+    localStorage.setItem('cartItems', JSON.stringify(getState().cartItems));
   };
 };

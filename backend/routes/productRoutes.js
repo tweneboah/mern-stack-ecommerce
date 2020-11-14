@@ -1,31 +1,9 @@
 import express from 'express';
-import asyncHandler from 'express-async-handler';
+import { getProductById, getProducts } from '../controllers/productController';
 const productRoutes = express.Router();
-import Product from '../models/productModel';
 
-//get all products
-productRoutes.get(
-  '/',
-  asyncHandler(async (req, res) => {
-    const products = await Product.find({});
-    res.json(products);
-  })
-);
-
-//Get a product
-productRoutes.get(
-  '/:id',
-  asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404); //You can ignore this and it will set to 500 bease on our configuration inside our error handler middleware
-
-      //Since we have our custom middleware we can pass our own error to the error handler because we are making use of express-async-handler
-      throw new Error('Product Not found');
-    }
-  })
-);
+//products
+productRoutes.route('/').get(getProducts);
+productRoutes.route('/:id').get(getProductById);
 
 export default productRoutes;
