@@ -3,7 +3,8 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
-} from './userSctionTypes';
+  USER_LOGOUT,
+} from '../actionTypes/userSctionTypes';
 
 export const loginAction = (email, password) => async dispatch => {
   try {
@@ -35,4 +36,13 @@ export const loginAction = (email, password) => async dispatch => {
           : error.message,
     });
   }
+};
+
+export const logoutAction = () => {
+  return async dispatch => {
+    localStorage.removeItem('userInfo');
+    dispatch({
+      type: USER_LOGOUT,
+    });
+  };
 };
