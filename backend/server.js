@@ -3,17 +3,16 @@ import dotenv from 'dotenv';
 import dbConnect from './config/db';
 import productRoutes from './routes/productRoutes';
 import { errorHandler, notFound } from './middlewares/errorMiddleware';
+import userRoutes from './routes/userRoutes';
 
 dotenv.config();
 dbConnect();
 
 const app = express();
-
-app.use((req, res, next) => {
-  next();
-});
+app.use(express.json());
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 //Error Handler
 app.use(notFound);
