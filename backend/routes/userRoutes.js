@@ -3,13 +3,15 @@ import {
   authUser,
   getUserProfile,
   registerUser,
+  updateUserProfile,
 } from '../controllers/userController';
 import { protect } from '../middlewares/authMiddleware';
-
+updateUserProfile;
 const userRoutes = express.Router();
 
 //products
 userRoutes.post('/login', authUser);
 userRoutes.route('/profile').get(protect, getUserProfile);
+userRoutes.post('/profile', protect, updateUserProfile);
 userRoutes.post('/register', registerUser);
 export default userRoutes;
