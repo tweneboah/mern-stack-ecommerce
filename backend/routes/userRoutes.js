@@ -12,6 +12,6 @@ const userRoutes = express.Router();
 //products
 userRoutes.post('/login', authUser);
 userRoutes.route('/profile').get(protect, getUserProfile);
-userRoutes.post('/profile', protect, updateUserProfile);
+userRoutes.put('/profile', protect, updateUserProfile);
 userRoutes.post('/register', registerUser);
 export default userRoutes;

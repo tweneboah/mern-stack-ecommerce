@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  USER_DETAILS_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -7,6 +10,9 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from '../actionTypes/userSctionTypes';
 
 export const loginAction = (email, password) => async dispatch => {
@@ -73,7 +79,6 @@ export const registerAction = (name, email, password) => async dispatch => {
     localStorage.setItem('userInfo', JSON.stringify(data));
 
     //LOGIN THE USER IN AFTER REGISTRATION because when register we get the same data as login and save to localstorage
-
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
@@ -81,6 +86,74 @@ export const registerAction = (name, email, password) => async dispatch => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+//For this we need a token to access this because we can get the userInfo in the store which has a token in it
+
+export const getUserDetailsAction = id => async (dispatch, getState) => {
+  try {
+    //destructure the login
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    dispatch({
+      type: USER_DETAILS_REQUEST,
+    });
+    //The way pass authorization we will pass it here as this
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`/api/users/${id}`, config);
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUserProfileAction = user => async (dispatch, getState) => {
+  try {
+    //destructure the login
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    dispatch({
+      type: USER_UPDATE_PROFILE_REQUEST,
+    });
+    //The way pass authorization we will pass it here as this
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.put(`/api/users/profile`, user, config);
+    dispatch({
+      type: USER_UPDATE_PROFILE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_PROFILE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
