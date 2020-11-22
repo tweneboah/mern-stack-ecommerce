@@ -4,6 +4,7 @@ import dbConnect from './config/db';
 import productRoutes from './routes/productRoutes';
 import { errorHandler, notFound } from './middlewares/errorMiddleware';
 import userRoutes from './routes/userRoutes';
+import { orderRoutes } from './routes/orderRoutes';
 
 dotenv.config();
 dbConnect();
@@ -13,7 +14,7 @@ app.use(express.json());
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
-
+app.use('/api/orders', orderRoutes);
 //Error Handler
 app.use(notFound);
 app.use(errorHandler);
