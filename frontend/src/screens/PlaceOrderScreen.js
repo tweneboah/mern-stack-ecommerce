@@ -173,18 +173,18 @@ import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
-// import { createOrder } from '../actions/orderActions';
+import { createOrderAction } from '../redux/actions/orderActions';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 // import { USER_DETAILS_RESET } from '../constants/userConstants';
 
-const PlaceOrderScreen = () => {
-  //This component contains the summary of our order
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
 
+  //This component contains the summary of our order
   const cart = useSelector(state => state.cart);
   //calculate price
 
   //We want to add additonal property to the cart, in mongoose we will call virtual property because it does not persist in our database
-
   cart.itemsPrice = cart.cartItems.reduce((acc, item) => {
     return acc + item.price * item.qty;
   }, 0);
@@ -200,8 +200,35 @@ const PlaceOrderScreen = () => {
     Number(cart.itemsPrice) +
     Number(cart.shippingPrice) +
     Number(cart.taxPrice);
-  console.log(cart);
-  const placeOrderHandler = () => {};
+
+  console.log(cart.paymentMethod);
+  const placeOrderHandler = () => {
+    //All these values is coming from our cart
+    dispatch(
+      createOrderAction({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
+
+  const orderCreate = useSelector(state => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+      // dispatch({ type: USER_DETAILS_RESET });
+      // dispatch({ type: ORDER_CREATE_RESET });
+    }
+    // eslint-disable-next-line
+  }, [history, success]);
+
   return (
     <>
       <>
@@ -290,14 +317,14 @@ const PlaceOrderScreen = () => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  {/* {error && <Message variant='danger'>{error}</Message>} */}
+                  {error && <Message variant='danger'>{error}</Message>}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
                     type='button'
                     className='btn-block'
                     disabled={cart.cartItems === 0}
-                    onClick={() => console.log('h')}>
+                    onClick={placeOrderHandler}>
                     Place Order
                   </Button>
                 </ListGroup.Item>
