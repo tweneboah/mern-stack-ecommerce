@@ -47,6 +47,7 @@ export const orderCreateReducer = (state = {}, action) => {
   }
 };
 
+//Details order reducer
 export const orderDetailsReducer = (
   state = { loading: true, orderItems: [], shippingAddress: {} },
   action
@@ -118,7 +119,7 @@ export const orderDeliverReducer = (state = {}, action) => {
   }
 };
 
-export const orderListMyReducer = (state = { orders: [] }, action) => {
+export const myOrdersListReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_LIST_MY_REQUEST:
       return {

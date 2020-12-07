@@ -6,9 +6,12 @@ const {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_CREATE_SUCCESS,
+  PRODUCT_CREATE_FAIL,
+  PRODUCT_CREATE_REQUEST,
 } = require('../actionTypes/productActionTypes');
 
-export const productListActions = () => {
+export const fetchAllProductsAction = () => {
   return async dispatch => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
@@ -60,4 +63,46 @@ export const productDetailsActions = id => {
       });
     }
   };
+};
+
+//Create Product
+export const createProductAction = productData => async (
+  dispatch,
+  getState
+) => {
+  console.log(productData);
+  try {
+    dispatch({
+      type: PRODUCT_CREATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(`/api/products`, productData, config);
+
+    dispatch({
+      type: PRODUCT_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      // dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_CREATE_FAIL,
+      payload: message,
+    });
+  }
 };

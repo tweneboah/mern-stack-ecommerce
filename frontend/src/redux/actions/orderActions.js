@@ -21,7 +21,7 @@ import {
 } from '../actionTypes/orderActionTypes';
 import { loginAction } from '../actions/userAction';
 
-export const createOrderAction = order => async (dispatch, getState) => {
+const createOrderAction = order => async (dispatch, getState) => {
   //Since this is need authentication we have to grab the user token from store
   try {
     dispatch({
@@ -49,7 +49,7 @@ export const createOrderAction = order => async (dispatch, getState) => {
     //   type: CART_CLEAR_ITEMS,
     //   payload: data,
     // });
-    localStorage.removeItem('cartItems');
+    // localStorage.removeItem('cartItems');
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -65,7 +65,7 @@ export const createOrderAction = order => async (dispatch, getState) => {
   }
 };
 
-export const getOrderDetails = id => async (dispatch, getState) => {
+const getOrderDetailsActon = id => async (dispatch, getState) => {
   try {
     dispatch({
       type: ORDER_DETAILS_REQUEST,
@@ -102,7 +102,7 @@ export const getOrderDetails = id => async (dispatch, getState) => {
   }
 };
 
-export const payOrder = (orderId, paymentResult) => async (
+const payOrderAction = (orderId, paymentResult) => async (
   dispatch,
   getState
 ) => {
@@ -188,7 +188,7 @@ export const deliverOrder = order => async (dispatch, getState) => {
   }
 };
 
-export const listMyOrders = () => async (dispatch, getState) => {
+const myOrdersListAction = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: ORDER_LIST_MY_REQUEST,
@@ -215,9 +215,9 @@ export const listMyOrders = () => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
-      dispatch(loginAction());
-    }
+    // if (message === 'Not authorized, token failed') {
+    //   dispatch(loginAction());
+    // }
     dispatch({
       type: ORDER_LIST_MY_FAIL,
       payload: message,
@@ -225,7 +225,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
   }
 };
 
-export const listOrders = () => async (dispatch, getState) => {
+export const listOrdersAction = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: ORDER_LIST_REQUEST,
@@ -261,3 +261,5 @@ export const listOrders = () => async (dispatch, getState) => {
     });
   }
 };
+
+export { createOrderAction, getOrderDetailsActon, myOrdersListAction };

@@ -1,10 +1,16 @@
 import express from 'express';
-import { addOrderItemsController } from '../controllers/orderController';
+import {
+  addOrderItemsController,
+  getOrderByIdController,
+  getMyOrdersController,
+} from '../controllers/orderController';
 import { protect } from '../middlewares/authMiddleware';
 
 const orderRoutes = express.Router();
 
 //products
-orderRoutes.post('/', protect, addOrderItemsController);
+orderRoutes.get('/myorders', protect, getMyOrdersController);
+orderRoutes.get('/:id', protect, getOrderByIdController);
+orderRoutes.route('/').post(protect, addOrderItemsController);
 
 export { orderRoutes };

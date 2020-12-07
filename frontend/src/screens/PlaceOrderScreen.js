@@ -201,7 +201,6 @@ const PlaceOrderScreen = ({ history }) => {
     Number(cart.shippingPrice) +
     Number(cart.taxPrice);
 
-  console.log(cart.paymentMethod);
   const placeOrderHandler = () => {
     //All these values is coming from our cart
     dispatch(

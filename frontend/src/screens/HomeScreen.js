@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Product from '../components/Product';
-import { productListActions } from '../redux/actions/productListActions';
+import { fetchAllProductsAction } from '../redux/actions/productListActions';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(productListActions());
+    dispatch(fetchAllProductsAction());
   }, [dispatch]);
 
   const productList = useSelector(state => state.productList);

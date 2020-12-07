@@ -19,4 +19,20 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById };
+const createProductController = asyncHandler(async (req, res) => {
+  const product = new Product({
+    name: req.body.name,
+    price: req.body.price,
+    user: req.user._id,
+    image: req.body.image,
+    brand: req.body.brand,
+    category: req.body.category,
+    countInStock: req.body.countInStock,
+    numReviews: req.body.numReviews,
+    description: req.body.description,
+  });
+
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+export { getProducts, getProductById, createProductController };

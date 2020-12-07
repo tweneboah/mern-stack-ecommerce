@@ -5,7 +5,8 @@ import Order from '../models/orderModel.js';
 // @route   POST /api/orders
 // @access  Private
 const addOrderItemsController = asyncHandler(async (req, res) => {
-  console.log(req.body);
+  console.log(req.user);
+  //Data from a body is any data that is passed from the frontend
   const {
     orderItems,
     shippingAddress,
@@ -19,8 +20,8 @@ const addOrderItemsController = asyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error('No order items');
-    return;
   } else {
+    console.log(req.user);
     const order = new Order({
       orderItems,
       user: req.user._id,
@@ -58,7 +59,7 @@ const getOrderByIdController = asyncHandler(async (req, res) => {
 // @desc    Update order to paid
 // @route   GET /api/orders/:id/pay
 // @access  Private
-const updateOrderToPaid = asyncHandler(async (req, res) => {
+const updateOrderToPaidController = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
   if (order) {
@@ -102,7 +103,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 // @desc    Get logged in user orders
 // @route   GET /api/orders/myorders
 // @access  Private
-const getMyOrders = asyncHandler(async (req, res) => {
+const getMyOrdersController = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.json(orders);
 });
@@ -118,8 +119,8 @@ const getOrders = asyncHandler(async (req, res) => {
 export {
   addOrderItemsController,
   getOrderByIdController,
-  updateOrderToPaid,
+  updateOrderToPaidController,
   updateOrderToDelivered,
-  getMyOrders,
+  getMyOrdersController,
   getOrders,
 };

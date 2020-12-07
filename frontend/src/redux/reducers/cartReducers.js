@@ -42,7 +42,6 @@ export const cartReducer = (
   state = { cartItems: [], shippingAddress: {} },
   action
 ) => {
-  console.log(state);
   switch (action.type) {
     case CART_ADD_ITEM:
       //Incoming data
