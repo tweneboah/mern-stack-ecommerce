@@ -16,6 +16,7 @@ import {
   userRegisterReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers';
+import { makePaymentsReducer } from './reducers/paymentsReducer';
 import {
   fetchAllOrdersReducer,
   myOrdersListReducer,
@@ -39,6 +40,7 @@ const reducer = combineReducers({
   myOrdersList: myOrdersListReducer,
   orderList: fetchAllOrdersReducer,
   userList: userListReducer,
+  makePayment: makePaymentsReducer,
 });
 
 //Put cart in storage as an initial state

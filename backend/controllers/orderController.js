@@ -5,8 +5,8 @@ import Order from '../models/orderModel.js';
 // @route   POST /api/orders
 // @access  Private
 const addOrderItemsController = asyncHandler(async (req, res) => {
-  console.log(req.user);
   //Data from a body is any data that is passed from the frontend
+  //data
   const {
     orderItems,
     shippingAddress,
@@ -21,7 +21,6 @@ const addOrderItemsController = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('No order items');
   } else {
-    console.log(req.user);
     const order = new Order({
       orderItems,
       user: req.user._id,

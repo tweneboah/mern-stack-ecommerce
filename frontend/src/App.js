@@ -17,6 +17,7 @@ import UserListScreen from './screens/UsersListScreen';
 import AdminCreateProducts from './screens/AdminScreens/AdminCreateProducts';
 import AdminFetchProducts from './screens/AdminScreens/AdminFetchProducts';
 import Switch from 'react-bootstrap/esm/Switch';
+import MakePayment from './components/MakePayment';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path='/shipping' component={ShippingScreen} />
           <Route exact path='/profile' component={ProfileScreen} />
           <Route exact path='/register' component={RegisterScreen} />
+          <Route exact path='/pay' component={MakePayment} />
           {/* Admin Routes */}
           <Route exact path='/admin/users' component={UserListScreen} />
           <Route

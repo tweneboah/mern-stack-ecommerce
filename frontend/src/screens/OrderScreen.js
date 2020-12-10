@@ -6,7 +6,7 @@ import { getOrderDetailsActon } from '../redux/actions/orderActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   //This component contains the summary of our order
@@ -25,6 +25,16 @@ const OrderScreen = ({ match }) => {
       dispatch(getOrderDetailsActon(match.params.id));
     }
   }, [order, match]);
+
+  //Send To Pay
+
+  const sendToPay = () => {
+    history.push('/pay', {
+      orderId: order._id,
+      userEmail: order.user.email,
+      totalAmount: order.totalPrice.toString(),
+    });
+  };
   return loading ? (
     <Loader />
   ) : error ? (
@@ -145,6 +155,7 @@ const OrderScreen = ({ match }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
+                  onClick={sendToPay}
                   type='button'
                   className='btn-block'
                   disabled={order.cartItems === 0}>
