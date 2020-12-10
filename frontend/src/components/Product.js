@@ -5,25 +5,34 @@ import Rating from '../components/Ratings';
 
 const Product = ({ product }) => {
   return (
-    <Card className='my-3 p-3 rounded'>
-      <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant='top'></Card.Img>
-      </Link>
-      <Card.Body>
-        <Link to={`/product/${product._id}`}>
-          <Card.Title as='div'>
-            <strong>{product.name}</strong>
-          </Card.Title>
-        </Link>
-        <Card.Text as='div'>
-          <Rating
-            value={product.rating}
-            text={`${product.numReviews} Reviews`}
-          />
-        </Card.Text>
-        <Card.Text as='h3'>GHS {product.price}</Card.Text>
-      </Card.Body>
-    </Card>
+    <>
+      <div class='w-full lg:w-1/4 sm:w-2/4 px-4 mb-8 lg:mb-0'>
+        <div class='relative rounded shadow-md'>
+          <Link to={`/product/${product._id}`}>
+            <img src={product.image} alt='' />
+
+            <div class='py-2 px-2 border-b'>
+              <h3 class='text-xl mb-1 font-heading'>
+                <a href='#'>
+                  {' '}
+                  <strong class=' text-gray-500 hover:text-blue-800'>
+                    {product.name}
+                  </strong>
+                </a>
+              </h3>
+              <p class='text-gray-500 leading-relaxed'>{product.description}</p>
+              <Rating
+                value={product.rating}
+                text={`${product.numReviews} Reviews`}
+              />
+            </div>
+          </Link>
+          <div class='py-3 px-5'>
+            <span class='text-2xl'>GHS {product.price}</span>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

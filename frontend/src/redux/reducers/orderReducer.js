@@ -142,7 +142,7 @@ export const myOrdersListReducer = (state = { orders: [] }, action) => {
   }
 };
 
-export const orderListReducer = (state = { orders: [] }, action) => {
+export const fetchAllOrdersReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_LIST_REQUEST:
       return {

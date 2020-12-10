@@ -1,15 +1,4 @@
-main {
-  min-height: 80vh;
-}
-
-h3 {
-  padding: 1rem 0;
-}
-.rating span {
-  margin: 0.1rem;
-}
-
-h1 {
-  font-size: 1.4rem;
-  padding: 0.1rem;
-}
+/* You can mport custom fonts here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

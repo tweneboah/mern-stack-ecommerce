@@ -16,39 +16,39 @@ import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UsersListScreen';
 import AdminCreateProducts from './screens/AdminScreens/AdminCreateProducts';
 import AdminFetchProducts from './screens/AdminScreens/AdminFetchProducts';
+import Switch from 'react-bootstrap/esm/Switch';
 
 const App = () => {
   return (
     <>
       <Router>
         <Header />
-        <main className='py-3'>
-          <Container>
-            <Route exact path='/' component={HomeScreen} />
-            {/* /cart/:id? means the id is optional */}
-            <Route exact path='/cart/:id?' component={CartScreen} />
-            <Route exact path='/product/:id' component={ProductScreen} />
-            <Route exact path='/order/:id' component={OrderScreen} />
-            <Route exact path='/login' component={LoginScreen} />
-            <Route exact path='/placeorder' component={PlaceOrderScreen} />
-            <Route exact path='/payment' component={PaymentScreen} />
-            <Route exact path='/shipping' component={ShippingScreen} />
-            <Route exact path='/profile' component={ProfileScreen} />
-            <Route exact path='/register' component={RegisterScreen} />
-            {/* Admin Routes */}
-            <Route exact path='/admin/users' component={UserListScreen} />
-            <Route
-              exact
-              path='/admin/createproducts'
-              component={AdminCreateProducts}
-            />
-            <Route
-              exact
-              path='/admin/fetchproducts'
-              component={AdminFetchProducts}
-            />
-          </Container>
-        </main>
+        <Switch>
+          <Route exact path='/' component={HomeScreen} />
+          {/* /cart/:id? means the id is optional */}
+          <Route exact path='/cart/:id?' component={CartScreen} />
+          <Route exact path='/product/:id' component={ProductScreen} />
+          <Route exact path='/order/:id' component={OrderScreen} />
+          <Route exact path='/login' component={LoginScreen} />
+          <Route exact path='/placeorder' component={PlaceOrderScreen} />
+          <Route exact path='/payment' component={PaymentScreen} />
+          <Route exact path='/shipping' component={ShippingScreen} />
+          <Route exact path='/profile' component={ProfileScreen} />
+          <Route exact path='/register' component={RegisterScreen} />
+          {/* Admin Routes */}
+          <Route exact path='/admin/users' component={UserListScreen} />
+          <Route
+            exact
+            path='/admin/createproducts'
+            component={AdminCreateProducts}
+          />
+          <Route
+            exact
+            path='/admin/fetchproducts'
+            component={AdminFetchProducts}
+          />
+        </Switch>
+
         <Footer />
       </Router>
     </>

@@ -52,6 +52,7 @@ export const cartReducer = (
       //product is the id that's how we assign it in our action
       if (existItem) {
         //We have to check to check if the product exist we will only keep the new one otherwise no
+
         return {
           ...state,
           cartItems: state.cartItems.map(x =>

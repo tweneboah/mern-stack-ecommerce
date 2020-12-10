@@ -25,14 +25,14 @@ const HomeScreen = () => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Row>
-          {products &&
-            products.map(product => (
-              <Col sm={12} md={4} lg={4} xl={3} key={product._id}>
-                <Product product={product} />
-              </Col>
-            ))}
-        </Row>
+        <>
+          <section class='py-4 px-4'>
+            <div class='flex flex-wrap -mx-4'>
+              {products &&
+                products.map(product => <Product product={product} />)}
+            </div>
+          </section>
+        </>
       )}
     </>
   );
