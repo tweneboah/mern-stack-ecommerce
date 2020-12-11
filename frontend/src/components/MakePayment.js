@@ -7,26 +7,22 @@ import { makePaymentAction } from '../redux/actions/paymentActions';
 const MakePayment = ({ location, history, match }) => {
   const { orderId, totalAmount, userEmail } = location.state;
 
-  // const { data } = await axios.post('/api/pay', {
-  //           paystackUrl: 'https://api.paystack.co/transaction/initialize',
-  //           paymentDetails: {
-  //             email: userEmail,
-  //             amount: totalAmount,
-  //             fullName: 'Emmanuel Tweneboah',
-  //           },
-  //         });
-
   const dispatch = useDispatch();
+  const paymentDetails = {
+    email: userEmail,
+    amount: Math.ceil(totalAmount) * 100, //Convert the amount to a whole number
+    fullName: 'Emmanuel Tweneboah',
+    callback_url: 'http://localhost:3000/profile',
+    metadata: { custom_fields: orderId },
+  };
 
-  console.log(userEmail, totalAmount);
   const submitHandler = async e => {
     e.preventDefault();
     dispatch(
-      makePaymentAction('https://api.paystack.co/transaction/initialize', {
-        email: 'twene@gmail.com',
-        amount: 300, //Convert the amount to a whole number
-        fullName: 'Emmanuel Tweneboah',
-      })
+      makePaymentAction(
+        'https://api.paystack.co/transaction/initialize',
+        paymentDetails
+      )
     );
   };
 

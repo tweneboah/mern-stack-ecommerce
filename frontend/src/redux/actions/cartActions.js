@@ -51,6 +51,7 @@ export const removeFromCart = id => {
 };
 
 export const saveShippingAddressAction = data => dispatch => {
+  console.log(data);
   dispatch({
     type: CART_SAVE_SHIPPING_ADDRESS,
     payload: data,

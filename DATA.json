@@ -1,0 +1,49 @@
+{
+  "isAdmin": true,
+  "_id": "5fd30b0aa2d1c92ba3678f1f",
+  "name": "Akos",
+  "email": "akos@gmail.com",
+  "password": "$2a$10$IghlOJNHsPDSIIwtNbc5Gu5wq5v0FZJvVdQnyvRM4D0P1U4dQQnze",
+  "createdAt": "2020-12-11T06:00:42.407Z",
+  "updatedAt": "2020-12-11T06:00:42.407Z",
+  "__v": 0,
+  "orders": [
+    {
+      "shippingAddress": {
+        "address": "Xifeng District, Lanzhou East Road, Forest Fire Brigade",
+        "city": "Kumasi",
+        "postalCode": "00322",
+        "country": "Ghna"
+      },
+      "taxPrice": 600,
+      "shippingPrice": 0,
+      "totalPrice": 4600,
+      "isPaid": false,
+      "isDelivered": false,
+      "_id": "5fd3862fb7d7eb0ff1dd7b95",
+      "orderItems": [
+        {
+          "_id": "5fd3862fb7d7eb0ff1dd7b96",
+          "product": "5fd3099a577a362ad404e5fe",
+          "name": "Computer i5",
+          "image": "https://images.pexels.com/photos/3755749/pexels-photo-3755749.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+          "price": 400,
+          "qty": 1
+        },
+        {
+          "_id": "5fd3862fb7d7eb0ff1dd7b97",
+          "product": "5fd38609b7d7eb0ff1dd7b94",
+          "name": "TV",
+          "image": "https://images.pexels.com/photos/1444416/pexels-photo-1444416.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+          "price": 900,
+          "qty": 4
+        }
+      ],
+      "user": "5fd30b0aa2d1c92ba3678f1f",
+      "createdAt": "2020-12-11T14:46:07.143Z",
+      "updatedAt": "2020-12-11T14:46:07.143Z",
+      "__v": 0
+    }
+  ],
+  "id": "5fd30b0aa2d1c92ba3678f1f"
+}

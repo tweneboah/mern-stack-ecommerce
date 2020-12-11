@@ -56,15 +56,9 @@ const authUser = asyncHandler(async (req, res) => {
 //USER PROFILE
 
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id).populate('orders').exec();
   if (user) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user,
-      isAdmin: user.isAdmin,
-    });
+    res.json(user);
   } else {
     res.status(401);
     throw new Error('User not found');

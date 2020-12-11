@@ -102,7 +102,6 @@ export const registerAction = (name, email, password) => async dispatch => {
 export const getUserDetailsAction = id => async (dispatch, getState) => {
   try {
     //destructure the login
-
     const {
       userLogin: { userInfo },
     } = getState();

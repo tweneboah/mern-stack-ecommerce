@@ -27,9 +27,8 @@ const ShippingScreen = ({ history }) => {
           country: shippingAddress.country,
         }}
         onSubmit={values => {
-          dispatch(
-            saveShippingAddressAction({ address, city, postalCode, country })
-          );
+          console.log(values);
+          dispatch(saveShippingAddressAction(values));
           history.push('/payment');
         }}>
         {props => {

@@ -5,7 +5,6 @@ import axios from 'axios';
 const paystackPostRequestProxyController = expressAsyncHandler(
   async (req, res) => {
     try {
-      console.log(req.body);
       let { data } = await axios.post(
         req.body.paystackUrl,
         req.body.paymentDetails,

@@ -23,9 +23,22 @@ const userSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
+
+//populate virtual properties
+
+userSchema.virtual('orders', {
+  ref: 'Order',
+  foreignField: 'user',
+  localField: '_id',
+});
 
 //Method accessible on all instance of users
 userSchema.methods.matchPassword = async function (enteredPassword) {
