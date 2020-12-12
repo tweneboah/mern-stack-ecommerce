@@ -154,13 +154,21 @@ const OrderScreen = ({ match, history }) => {
                 {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button
-                  onClick={sendToPay}
-                  type='button'
-                  className='btn-block'
-                  disabled={order.cartItems === 0}>
-                  Pay Now
-                </Button>
+                {!order.isPaid ? (
+                  <Button
+                    onClick={sendToPay}
+                    type='button'
+                    className='btn-block'
+                    disabled={order.cartItems === 0}>
+                    Continue to Payment
+                  </Button>
+                ) : (
+                  <button
+                    disabled
+                    className='bg-red-900 text-white py-3 px-2 block w-full text-2xl cursor-not-allowed'>
+                    Already Paid
+                  </button>
+                )}
               </ListGroup.Item>
             </ListGroup>
           </Card>

@@ -21,6 +21,13 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_RESET,
   ORDER_CREATE_RESET,
+  FETCH_ALL_ORDERS_FAIL,
+  FETCH_ALL_ORDERS_SUCCESS,
+  FETCH_ALL_ORDERS_RESET,
+  FETCH_ALL_ORDERS_REQUEST,
+  UPDATE_ORDER_TO_DELIVERED_FAIL,
+  UPDATE_ORDER_TO_DELIVERED_SUCCESS,
+  UPDATE_ORDER_TO_DELIVERED_REQUEST,
 } from '../actionTypes/orderActionTypes';
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -96,24 +103,24 @@ export const orderPayReducer = (state = {}, action) => {
   }
 };
 
-export const orderDeliverReducer = (state = {}, action) => {
+export const updateOrderToDeliverReducer = (state = {}, action) => {
   switch (action.type) {
-    case ORDER_DELIVER_REQUEST:
+    case UPDATE_ORDER_TO_DELIVERED_REQUEST:
       return {
         loading: true,
       };
-    case ORDER_DELIVER_SUCCESS:
+    case UPDATE_ORDER_TO_DELIVERED_SUCCESS:
       return {
         loading: false,
         success: true,
       };
-    case ORDER_DELIVER_FAIL:
+    case UPDATE_ORDER_TO_DELIVERED_FAIL:
       return {
         loading: false,
         error: action.payload,
       };
-    case ORDER_DELIVER_RESET:
-      return {};
+    // case ORDER_DELIVER_RESET:
+    //   return {};
     default:
       return state;
   }
@@ -144,16 +151,16 @@ export const myOrdersListReducer = (state = { orders: [] }, action) => {
 
 export const fetchAllOrdersReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
-    case ORDER_LIST_REQUEST:
+    case FETCH_ALL_ORDERS_REQUEST:
       return {
         loading: true,
       };
-    case ORDER_LIST_SUCCESS:
+    case FETCH_ALL_ORDERS_SUCCESS:
       return {
         loading: false,
         orders: action.payload,
       };
-    case ORDER_LIST_FAIL:
+    case FETCH_ALL_ORDERS_FAIL:
       return {
         loading: false,
         error: action.payload,

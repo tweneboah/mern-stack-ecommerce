@@ -35,4 +35,30 @@ const createProductController = asyncHandler(async (req, res) => {
   const createdProduct = await product.save();
   res.status(201).json(createdProduct);
 });
-export { getProducts, getProductById, createProductController };
+
+//FILE UPLOAD
+const fileUploadController = asyncHandler(async (req, res) => {
+  // const data = '';
+  // data.append('file', req.body); //Image to upload
+  // data.append('upload_preset', 'mern-upload'); //cloudinary preset
+  // data.append('cloud_name', 'tweneboah'); //The name of your cloudinary;
+  // //make the request
+  // const newFile = await fetch(
+  //   'https://api.cloudinary.com/v1_1/tweneboah/image/upload',
+  //   {
+  //     method: 'post',
+  //     body: data,
+  //   }
+  // );
+
+  // res.send(newFile);
+
+  res.send('fil');
+});
+
+export {
+  getProducts,
+  getProductById,
+  createProductController,
+  fileUploadController,
+};

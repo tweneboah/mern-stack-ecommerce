@@ -1,5 +1,10 @@
 import axios from 'axios';
 import {
+  FILE_UPLOAD_FAIL,
+  FILE_UPLOAD_REQUEST,
+  FILE_UPLOAD_SUCCESS,
+} from '../actionTypes/fileUploadActionTypes';
+import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,

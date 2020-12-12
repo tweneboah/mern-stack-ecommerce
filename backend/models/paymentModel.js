@@ -2,26 +2,29 @@ import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
+    required: true,
   },
   order: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Order',
+    type: String,
+    required: true,
   },
-  paymentDetails: {
-    acoountNumber: {
-      type: String,
-      required: true,
-    },
-    amountPaid: {
-      type: String,
-      required: true,
-    },
-    paymentReference: {
-      type: String,
-      required: true,
-    },
+
+  amountPaid: {
+    type: String,
+    required: true,
+  },
+  paymentReference: {
+    type: String,
+    required: true,
+  },
+  bank: {
+    type: String,
+    required: true,
+  },
+  lastFourDigitOfYourAccount: {
+    type: String,
+    required: true,
   },
 });
 

@@ -69,6 +69,7 @@ import expressAsyncHandler from 'express-async-handler';
 import crypto from 'crypto';
 import User from '../models/userModel';
 import Order from '../models/orderModel';
+import { Payment } from '../models/paymentModel';
 //Paystack will this automatically
 const paystackWebhookController = expressAsyncHandler(async (req, res) => {
   let secret = process.env.paystackTestSecretKey;
@@ -83,21 +84,39 @@ const paystackWebhookController = expressAsyncHandler(async (req, res) => {
       const { amount, reference, currency, channel } = webHookData.data;
       const { last4, exp_year, bank } = webHookData.data.authorization;
       const { email } = webHookData.data.customer;
-      console.log(webHookData.data.metadata.custom_fields);
 
+      // console.log('email', email);
+      // console.log('amount', amount);
+      // console.log('reference', reference);
+      // console.log('currency', currency);
+      // console.log('last4', last4);
+      // console.log('exp_year', exp_year);
+      // console.log('bank', bank);
       if (
         webHookData.data.metadata &&
         webHookData.data.metadata.custom_fields
       ) {
+        //Order Id
+        const orderId = webHookData.data.metadata.custom_fields;
         const paid = await Order.findByIdAndUpdate(
-          webHookData.data.metadata.custom_fields,
+          orderId,
           {
             isPaid: true,
           },
           { runValidators: true, new: true }
         );
 
-        console.log(paid);
+        //Create payment
+
+        const newPayment = await Payment.create({
+          user: email,
+          order: orderId,
+          amountPaid: amount,
+          paymentReference: reference,
+          bank: bank,
+          lastFourDigitOfYourAccount: last4,
+        });
+        console.log(newPayment);
       }
     }
   }

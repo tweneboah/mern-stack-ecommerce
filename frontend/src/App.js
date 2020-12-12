@@ -18,6 +18,8 @@ import AdminCreateProducts from './screens/AdminScreens/AdminCreateProducts';
 import AdminFetchProducts from './screens/AdminScreens/AdminFetchProducts';
 import Switch from 'react-bootstrap/esm/Switch';
 import MakePayment from './components/MakePayment';
+import AdminAllOrdersScreen from './screens/AdminScreens/AdminAllOrdersScreen';
+import AdminUpdateOrderToDeliverScreen from './screens/AdminScreens/AdminUpdateOrderToDeliverScreen';
 
 const App = () => {
   return (
@@ -48,6 +50,18 @@ const App = () => {
             exact
             path='/admin/fetchproducts'
             component={AdminFetchProducts}
+          />
+
+          <Route
+            exact
+            path='/admin/allorders'
+            component={AdminAllOrdersScreen}
+          />
+
+          <Route
+            exact
+            path='/admin/updatetoorder/:id'
+            component={AdminUpdateOrderToDeliverScreen}
           />
         </Switch>
 

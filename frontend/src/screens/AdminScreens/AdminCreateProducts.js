@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productListActions';
+import { productFileImageUploadAction } from '../../redux/actions/productFileImageUploadAction';
 
 const AdminCreateProducts = () => {
+  const [file, setFile] = useState('initialState');
+  console.log(file);
+
+  const uploadFile = () => {
+    dispatch(productFileImageUploadAction(file));
+  };
   const dispatch = useDispatch();
   return (
     <>
+      <input type='file' onChange={e => setFile(e.target.files[0])} />
+      <button onClick={uploadFile}>Upload file</button>
       <Formik
         initialValues={{
           name: '',

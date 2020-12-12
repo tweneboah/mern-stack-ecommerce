@@ -218,12 +218,21 @@ const Header = () => {
                     role='menuitem'>
                     Your Profile
                   </Link>
-                  <a
-                    href='#'
+
+                  <Link
+                    to='/admin/allorders'
+                    onClick={() => settogle(!togle)}
                     class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                     role='menuitem'>
-                    Settings
-                  </a>
+                    All orders
+                  </Link>
+
+                  <Link
+                    class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                    onClick={() => settogle(!togle)}
+                    to='/admin/createproducts'>
+                    Add Product
+                  </Link>
                   <a
                     href='#'
                     class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'

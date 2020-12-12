@@ -24,6 +24,7 @@ import {
   orderDetailsReducer,
   orderPayReducer,
 } from './reducers/orderReducer';
+import { productFileUploadReducer } from './reducers/productFileUploadReducer';
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -38,9 +39,10 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   myOrdersList: myOrdersListReducer,
-  orderList: fetchAllOrdersReducer,
+  allOrders: fetchAllOrdersReducer,
   userList: userListReducer,
   makePayment: makePaymentsReducer,
+  productImageUploaded: productFileUploadReducer,
 });
 
 //Put cart in storage as an initial state

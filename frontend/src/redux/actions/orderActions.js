@@ -12,12 +12,12 @@ import {
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_SUCCESS,
   ORDER_LIST_MY_FAIL,
-  ORDER_LIST_FAIL,
-  ORDER_LIST_SUCCESS,
-  ORDER_LIST_REQUEST,
-  ORDER_DELIVER_FAIL,
-  ORDER_DELIVER_SUCCESS,
-  ORDER_DELIVER_REQUEST,
+  FETCH_ALL_ORDERS_REQUEST,
+  FETCH_ALL_ORDERS_SUCCESS,
+  FETCH_ALL_ORDERS_FAIL,
+  UPDATE_ORDER_TO_DELIVERED_FAIL,
+  UPDATE_ORDER_TO_DELIVERED_SUCCESS,
+  UPDATE_ORDER_TO_DELIVERED_REQUEST,
 } from '../actionTypes/orderActionTypes';
 import { loginAction } from '../actions/userAction';
 
@@ -27,7 +27,6 @@ const createOrderAction = order => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_REQUEST,
     });
-
     const {
       userLogin: { userInfo },
     } = getState();
@@ -147,10 +146,11 @@ const payOrderAction = (orderId, paymentResult) => async (
   }
 };
 
-export const deliverOrder = order => async (dispatch, getState) => {
+//=====UPDATE TO DELIVERED==========
+const updateTodeliverOrderAction = orderId => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_DELIVER_REQUEST,
+      type: UPDATE_ORDER_TO_DELIVERED_REQUEST,
     });
 
     const {
@@ -164,13 +164,13 @@ export const deliverOrder = order => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/orders/${order._id}/deliver`,
+      `/api/orders/update-order-to-delivered/${orderId}`,
       {},
       config
     );
 
     dispatch({
-      type: ORDER_DELIVER_SUCCESS,
+      type: UPDATE_ORDER_TO_DELIVERED_SUCCESS,
       payload: data,
     });
   } catch (error) {
@@ -182,7 +182,7 @@ export const deliverOrder = order => async (dispatch, getState) => {
       dispatch(loginAction());
     }
     dispatch({
-      type: ORDER_DELIVER_FAIL,
+      type: UPDATE_ORDER_TO_DELIVERED_FAIL,
       payload: message,
     });
   }
@@ -225,10 +225,11 @@ const myOrdersListAction = () => async (dispatch, getState) => {
   }
 };
 
-export const listOrdersAction = () => async (dispatch, getState) => {
+//fetch all orders
+const fetchAllOrdersAction = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_LIST_REQUEST,
+      type: FETCH_ALL_ORDERS_REQUEST,
     });
 
     const {
@@ -244,7 +245,7 @@ export const listOrdersAction = () => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/orders`, config);
 
     dispatch({
-      type: ORDER_LIST_SUCCESS,
+      type: FETCH_ALL_ORDERS_SUCCESS,
       payload: data,
     });
   } catch (error) {
@@ -256,10 +257,16 @@ export const listOrdersAction = () => async (dispatch, getState) => {
       dispatch(loginAction());
     }
     dispatch({
-      type: ORDER_LIST_FAIL,
+      type: FETCH_ALL_ORDERS_FAIL,
       payload: message,
     });
   }
 };
 
-export { createOrderAction, getOrderDetailsActon, myOrdersListAction };
+export {
+  createOrderAction,
+  getOrderDetailsActon,
+  myOrdersListAction,
+  fetchAllOrdersAction,
+  updateTodeliverOrderAction,
+};

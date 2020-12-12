@@ -83,7 +83,7 @@ const updateOrderToPaidController = asyncHandler(async (req, res) => {
 // @desc    Update order to delivered
 // @route   GET /api/orders/:id/deliver
 // @access  Private/Admin
-const updateOrderToDelivered = asyncHandler(async (req, res) => {
+const updateOrderToDeliveredController = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
   if (order) {
@@ -107,11 +107,11 @@ const getMyOrdersController = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
-// @desc    Get all orders
+// @desc    Get all orders only admin can access this
 // @route   GET /api/orders
 // @access  Private/Admin
 const getAllOrdersController = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name');
+  const orders = await Order.find({}).populate('user', 'id name email');
   res.json(orders);
 });
 
@@ -119,7 +119,7 @@ export {
   addOrderItemsController,
   getOrderByIdController,
   updateOrderToPaidController,
-  updateOrderToDelivered,
+  updateOrderToDeliveredController,
   getMyOrdersController,
   getAllOrdersController,
 };
