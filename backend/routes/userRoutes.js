@@ -17,4 +17,5 @@ userRoutes.route('/profile').get(protect, getUserProfile);
 userRoutes.put('/profile', protect, updateUserProfile);
 userRoutes.post('/register', registerUser);
 userRoutes.get('/', protect, isAdmin, getUsersController);
+
 export default userRoutes;

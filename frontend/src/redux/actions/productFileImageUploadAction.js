@@ -6,7 +6,6 @@ import {
 } from '../actionTypes/fileUploadActionTypes';
 
 const productFileImageUploadAction = fileToUpload => async dispatch => {
-  console.log(fileToUpload);
   try {
     dispatch({
       type: FILE_UPLOAD_REQUEST,

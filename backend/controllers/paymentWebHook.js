@@ -84,14 +84,6 @@ const paystackWebhookController = expressAsyncHandler(async (req, res) => {
       const { amount, reference, currency, channel } = webHookData.data;
       const { last4, exp_year, bank } = webHookData.data.authorization;
       const { email } = webHookData.data.customer;
-
-      // console.log('email', email);
-      // console.log('amount', amount);
-      // console.log('reference', reference);
-      // console.log('currency', currency);
-      // console.log('last4', last4);
-      // console.log('exp_year', exp_year);
-      // console.log('bank', bank);
       if (
         webHookData.data.metadata &&
         webHookData.data.metadata.custom_fields

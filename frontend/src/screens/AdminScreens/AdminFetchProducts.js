@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import { fetchAllProductsAction } from '../../redux/actions/productListActions';
+import { fetchAllProductsAction } from '../../redux/actions/productActions';
 
 const AdminFetchProducts = ({ history }) => {
   //Redirect is not admin
@@ -31,9 +32,11 @@ const AdminFetchProducts = ({ history }) => {
           <h1>Products</h1>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3'>
-            <i className='fas fa-plus'></i> Create Product
-          </Button>
+          <Link to='/admin/createproducts'>
+            <Button className='my-3'>
+              <i className='fas fa-plus'></i> Create Product
+            </Button>
+          </Link>
         </Col>
       </Row>
       {loading && <Loader />}
@@ -58,13 +61,20 @@ const AdminFetchProducts = ({ history }) => {
             <tbody>
               {products.map(product => (
                 <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
+                  <td>
+                    <img
+                      class='inline-block h-14 w-14 rounded-full'
+                      src={product.image}
+                      alt=''></img>
+                  </td>
+                  <td>
+                    <Link to='/'>{product.name}</Link>
+                  </td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer to={`/admin/edit/product/${product._id}`}>
                       <Button variant='light' className='btn-sm'>
                         <i className='fas fa-edit'></i>
                       </Button>

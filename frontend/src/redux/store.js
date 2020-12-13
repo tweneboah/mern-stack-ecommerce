@@ -16,7 +16,10 @@ import {
   userRegisterReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers';
-import { makePaymentsReducer } from './reducers/paymentsReducer';
+import {
+  fetchAllPaymentsReducer,
+  makePaymentsReducer,
+} from './reducers/paymentsReducer';
 import {
   fetchAllOrdersReducer,
   myOrdersListReducer,
@@ -43,6 +46,7 @@ const reducer = combineReducers({
   userList: userListReducer,
   makePayment: makePaymentsReducer,
   productImageUploaded: productFileUploadReducer,
+  allPayments: fetchAllPaymentsReducer,
 });
 
 //Put cart in storage as an initial state

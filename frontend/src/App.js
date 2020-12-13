@@ -20,6 +20,9 @@ import Switch from 'react-bootstrap/esm/Switch';
 import MakePayment from './components/MakePayment';
 import AdminAllOrdersScreen from './screens/AdminScreens/AdminAllOrdersScreen';
 import AdminUpdateOrderToDeliverScreen from './screens/AdminScreens/AdminUpdateOrderToDeliverScreen';
+import AdminAllPayments from './screens/AdminScreens/AdminAllPayments';
+import AdminEditProduct from './screens/AdminScreens/AdminEditProduct';
+import AdminDasboard from './screens/AdminScreens/AdminDasboard';
 
 const App = () => {
   return (
@@ -60,9 +63,16 @@ const App = () => {
 
           <Route
             exact
+            path='/admin/edit/product/:id'
+            component={AdminEditProduct}
+          />
+          <Route
+            exact
             path='/admin/updatetoorder/:id'
             component={AdminUpdateOrderToDeliverScreen}
           />
+          <Route exact path='/admin/allpayments' component={AdminAllPayments} />
+          <Route exact path='/admin/dashboard' component={AdminDasboard} />
         </Switch>
 
         <Footer />

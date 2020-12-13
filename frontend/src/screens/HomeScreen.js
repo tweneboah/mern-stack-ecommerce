@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Product from '../components/Product';
-import { fetchAllProductsAction } from '../redux/actions/productListActions';
+import { fetchAllProductsAction } from '../redux/actions/productActions';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();

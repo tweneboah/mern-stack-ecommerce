@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Card,
-  Button,
-  Form,
-} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Ratings from '../components/Ratings';
-import { productDetailsActions } from '../redux/actions/productListActions';
+import { productDetailsActions } from '../redux/actions/productActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 

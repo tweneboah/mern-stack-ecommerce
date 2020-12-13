@@ -69,116 +69,143 @@ const ProfileScreen = ({ location, history }) => {
       dispatch(updateUserProfileAction({ name, email, password }));
     }
   };
+  //=========
+  //Total spent
+  const totalSpent = orders?.reduce((acc, curr) => {
+    return acc + curr.totalPrice;
+  }, 0);
 
   return (
-    <Row>
-      <Col md={3}>
-        {' '}
-        <h1>User Profile</h1>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && (
-          <Message variant='success'>Profile Updated Successfully</Message>
-        )}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='name'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter name'
-              value={name && name}
-              onChange={e => setName(e.target.value)}></Form.Control>
-          </Form.Group>
+    <>
+      {loadingOrders ? (
+        <h1>loading</h1>
+      ) : (
+        <section class='py-8 px-4 min-h-screen'>
+          <h2 class='text-3xl mb-2  text-center font-heading font-semibold'>
+            Orders history
+          </h2>
 
-          <Form.Group controlId='email'>
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type='email'
-              placeholder='Enter email'
-              value={email && email}
-              onChange={e => setEmail(e.target.value)}></Form.Control>
-          </Form.Group>
+          <div class='flex justify-around flex-wrap -mx-4 mb-8'>
+            <div class='w-full lg:w-1/4 px-4 mb-6 lg:mb-0'>
+              <div class='h-full'>
+                <div class='text-center p-4 mb-2 bg-blue-700 text-white rounded'>
+                  <h3 class='text-3xl leading-tight text-yellow-200 font-heading font-semibold'>
+                    GHS {totalSpent}
+                  </h3>
+                  <span class='leading-none'>Amount Spent</span>
+                </div>
+              </div>
+            </div>
 
-          <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='confirmPassword'>
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Confirm password'
-              value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}></Form.Control>
-          </Form.Group>
-
-          <Button type='submit' variant='primary'>
-            Update
-          </Button>
-        </Form>
-      </Col>
-      <Col md={9}>
-        <h2>My Orders</h2>
-        {loadingOrders ? (
-          <Loader />
-        ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
-        ) : (
-          <Table striped bordered hover responsive className='table-sm'>
+            <div class='w-full lg:w-1/4 px-4 mb-6 lg:mb-0'>
+              <div class='h-full'>
+                <div class='text-center p-4 mb-2 bg-green-500 text-white rounded'>
+                  <h3 class='text-3xl leading-tight  font-heading font-semibold'>
+                    {orders?.length}
+                  </h3>
+                  <span class='leading-none'>Total Purchased</span>
+                </div>
+              </div>
+            </div>
+            <div class='w-full lg:w-1/4 px-4 mb-6 lg:mb-0'>
+              <div class='h-full'>
+                <div class='text-center p-4 mb-2 bg-red-400 text-white rounded'>
+                  <h3 class='text-3xl leading-tight  font-heading font-semibold'>
+                    159
+                  </h3>
+                  <span class='leading-none'>Peding</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class='w-full table-auto text-center'>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
-                <th></th>
+                <th class='border-t px-2 py-2' scope='col'>
+                  Order Id
+                </th>
+
+                <th class='border-t px-2 py-2' scope='col'>
+                  Date
+                </th>
+                <th class='text-center border-t px-2 py-2' scope='col'>
+                  Amount
+                </th>
+                <th class='text-center border-t px-2 py-2' scope='col'>
+                  Paid
+                </th>
+                <th class='text-center border-t px-2 py-2' scope='col'>
+                  Delivered
+                </th>
+                <th class='text-left border-t px-2 py-2' scope='col'>
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
-              {orders.map(order => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
-                  <td>
+              {orders?.map(order => (
+                <tr>
+                  <td class='border-t px-2 py-2'>{order._id}</td>
+                  <td class='border-t px-2 py-2'>
+                    <a href='#'>
+                      <img
+                        class='inline-block mr-2 rounded-full'
+                        src='placeholders-2-0/pictures/male_avatar.svg'
+                        alt=''
+                        height='40'
+                        width='40'
+                      />{' '}
+                      {order.createdAt.substring(0, 10)}
+                    </a>
+                  </td>
+                  <td class='border-t px-2 py-2'>{order.totalPrice}</td>
+                  <td class='text-center border-t px-2 py-2'>
                     {order.isPaid ? (
                       // order.paidAt.substring(0, 10)
-
-                      <i
-                        class='fas fa-check-double'
-                        style={{ color: 'green' }}></i>
+                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-green-500'>
+                        Paid
+                      </span>
                     ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-red-500'>
+                        Unpaid
+                      </span>
                     )}
                   </td>
-                  <td>
+                  <td class='text-center border-t px-2 py-2'>
                     {order.isDelivered ? (
-                      'Delivered Date'
+                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-red-500'>
+                        Not delivered
+                      </span>
                     ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-green-500'>
+                        Delivered
+                      </span>
                     )}
                   </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm' variant='light'>
-                        Details
-                      </Button>
-                    </LinkContainer>
+
+                  <td class='text-center border-t px-2 py-2'>
+                    <Link to={`/order/${order._id}`}>
+                      <svg
+                        className='h-5 w-5 cursor-pointer'
+                        xmlns='http://www.w3.org/2000/svg'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'>
+                        <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
+                        <path
+                          fill-rule='evenodd'
+                          d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
+                          clip-rule='evenodd'
+                        />
+                      </svg>
+                    </Link>
                   </td>
                 </tr>
               ))}
             </tbody>
-          </Table>
-        )}
-      </Col>
-    </Row>
+          </table>
+        </section>
+      )}
+    </>
   );
 };
 

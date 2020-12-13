@@ -1,3 +1,4 @@
+import expressAsyncHandler from 'express-async-handler';
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel';
 
@@ -36,29 +37,47 @@ const createProductController = asyncHandler(async (req, res) => {
   res.status(201).json(createdProduct);
 });
 
-//FILE UPLOAD
-const fileUploadController = asyncHandler(async (req, res) => {
-  // const data = '';
-  // data.append('file', req.body); //Image to upload
-  // data.append('upload_preset', 'mern-upload'); //cloudinary preset
-  // data.append('cloud_name', 'tweneboah'); //The name of your cloudinary;
-  // //make the request
-  // const newFile = await fetch(
-  //   'https://api.cloudinary.com/v1_1/tweneboah/image/upload',
-  //   {
-  //     method: 'post',
-  //     body: data,
-  //   }
-  // );
+//==================
+//========UPDATE PRODUCT
+//=================
+const updateProductController = expressAsyncHandler(async (req, res) => {
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+  res.send(updatedProduct);
+});
 
-  // res.send(newFile);
+//=============================
+// DELETE PRODUCT
+//=====================
+const deleteProductController = expressAsyncHandler(async (req, res) => {
+  const deletedProduct = await Product.findByIdAndRemove(req.params.id);
+  res.send(deletedProduct);
+});
 
-  res.send('fil');
+//===========
+// FIND PRODUCT BY NAME
+//==========
+
+const findProductByNameController = expressAsyncHandler(async (req, res) => {
+  // const products = await Product.find({ name: req.query });
+  // if (products || products.length === []) {
+  //   res.json(products);
+  // } else {
+  //   throw new Error('Error occured');
+  // }
 });
 
 export {
   getProducts,
   getProductById,
   createProductController,
-  fileUploadController,
+  updateProductController,
+  deleteProductController,
+  findProductByNameController,
 };
