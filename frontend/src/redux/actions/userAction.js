@@ -23,6 +23,9 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
 } from '../actionTypes/userSctionTypes';
 
+//=====================
+//=====LOGIN
+//=====================
 export const loginAction = (email, password) => async dispatch => {
   try {
     dispatch({
@@ -55,6 +58,10 @@ export const loginAction = (email, password) => async dispatch => {
   }
 };
 
+//=====================
+//=====LOG OUT
+//=====================
+
 export const logoutAction = () => {
   return async dispatch => {
     localStorage.removeItem('userInfo');
@@ -64,6 +71,9 @@ export const logoutAction = () => {
   };
 };
 
+//=====================
+//=====REGISTER
+//=====================
 export const registerAction = (name, email, password) => async dispatch => {
   try {
     dispatch({
@@ -102,6 +112,9 @@ export const registerAction = (name, email, password) => async dispatch => {
   }
 };
 
+//=====================
+//===== GET USER DETAILS
+//=====================
 //For this we need a token to access this because we can get the userInfo in the store which has a token in it
 
 export const getUserDetailsAction = id => async (dispatch, getState) => {
@@ -136,7 +149,14 @@ export const getUserDetailsAction = id => async (dispatch, getState) => {
   }
 };
 
-export const updateUserProfileAction = user => async (dispatch, getState) => {
+//=====================
+//===== UPDATE USER PROFILE
+//=====================
+
+export const updateUserProfileAction = (userId, userData) => async (
+  dispatch,
+  getState
+) => {
   try {
     //destructure the login
 
@@ -153,7 +173,11 @@ export const updateUserProfileAction = user => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(`/api/users/profile`, user, config);
+    const { data } = await axios.put(
+      `/api/users/profile/${userId}`,
+      userData,
+      config
+    );
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -168,6 +192,10 @@ export const updateUserProfileAction = user => async (dispatch, getState) => {
     });
   }
 };
+
+//=====================
+//===== FETCH ALL USERS
+//=====================
 
 //Only admin can see all users
 export const fetchAllUsersAction = () => async (dispatch, getState) => {

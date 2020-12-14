@@ -72,7 +72,12 @@ const getUsersController = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
-const updateUserProfile = asyncHandler(async (req, res) => {
+//=============
+//Update user profile
+// NOTE: Since findByIdAndUpdate does not listen to model middleware we can't use that before the middleware  of hashing the password won't run hence we cant login if we use that API
+//==================
+
+const updateUserProfileController = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -88,6 +93,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      password: updatedUser.password,
     });
   } else {
     res.status(401);
@@ -99,6 +105,6 @@ export {
   authUser,
   getUserProfile,
   registerUser,
-  updateUserProfile,
+  updateUserProfileController,
   getUsersController,
 };

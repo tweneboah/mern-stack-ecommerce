@@ -23,6 +23,7 @@ import AdminUpdateOrderToDeliverScreen from './screens/AdminScreens/AdminUpdateO
 import AdminAllPayments from './screens/AdminScreens/AdminAllPayments';
 import AdminEditProduct from './screens/AdminScreens/AdminEditProduct';
 import AdminDasboard from './screens/AdminScreens/AdminDasboard';
+import EditProfileScreen from './screens/EditProfileScreen';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route exact path='/' component={HomeScreen} />
           {/* /cart/:id? means the id is optional */}
           <Route exact path='/cart/:id?' component={CartScreen} />
+          <Route exact path='/editProfile/:id?' component={EditProfileScreen} />
           <Route exact path='/product/:id' component={ProductScreen} />
           <Route exact path='/order/:id' component={OrderScreen} />
           <Route exact path='/login' component={LoginScreen} />
