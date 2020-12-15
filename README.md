@@ -18,3 +18,4 @@ ecommerce application made with React, Redux, Node js, Express, mongode, Mongoos
 4. A user can create only store and if a user want to create more he/she need to subscribe to our plans
 5. When a client plays an order our system will hold the money until the customer is satified with the product before we release the money to the store owner
 6. Creating mobile App for it using React Native
+# blisspath-ecommerce-backend
