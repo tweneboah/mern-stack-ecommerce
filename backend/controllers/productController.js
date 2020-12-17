@@ -1,7 +1,7 @@
 import expressAsyncHandler from 'express-async-handler';
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel';
-
+const { cloudinary } = require('../config/cloudinary');
 //Get all Products
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
@@ -19,6 +19,19 @@ const getProductById = asyncHandler(async (req, res) => {
     throw new Error('Product Not found');
   }
 });
+
+const fileUploadController = async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const upload = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: 'yvxvtoyq',
+    });
+    res.send(upload);
+    console.log(upload);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const createProductController = asyncHandler(async (req, res) => {
   const product = new Product({
@@ -80,4 +93,5 @@ export {
   updateProductController,
   deleteProductController,
   findProductByNameController,
+  fileUploadController,
 };

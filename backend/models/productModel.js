@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-      type: Object,
+      type: [String],
     },
     brand: {
       type: String,
@@ -38,7 +38,15 @@ const productSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      required: true,
+      enum: [
+        'Fashion',
+        'Gents',
+        'Ladies',
+        'Hot Deals',
+        'Phone Accessories',
+        'Laptops and Accessories',
+        'Home Appliances',
+      ],
     },
     description: {
       type: String,
