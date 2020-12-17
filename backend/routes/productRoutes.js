@@ -2,6 +2,7 @@ import express from 'express';
 import {
   createProductController,
   deleteProductController,
+  fileUploadController,
   findProductByNameController,
   getProductById,
   getProducts,
@@ -16,6 +17,7 @@ productRoutes.route('/').get(getProducts);
 productRoutes.route('/find').get(findProductByNameController);
 productRoutes.post('/', protect, protect, isAdmin, createProductController);
 
+productRoutes.post('/file', fileUploadController);
 productRoutes.route('/:id').get(getProductById);
 productRoutes.put('/update/:id', updateProductController);
 productRoutes.delete('/delete/:id', deleteProductController);

@@ -32,6 +32,15 @@ const AdminAllOrdersScreen = ({ history }) => {
   const allOrders = useSelector(state => state.allOrders);
   const { loading, orders, error } = allOrders;
   console.log(orders);
+
+  //=======
+  //TOTAL ORDERS
+  //======
+
+  const totalSpent = orders?.reduce((acc, curr) => {
+    return curr.totalPrice + acc;
+  }, 0);
+
   return (
     // <div>
     //   <h1>All orders {orders?.length}</h1>
@@ -75,7 +84,7 @@ const AdminAllOrdersScreen = ({ history }) => {
                 <div class='h-full'>
                   <div class='text-center p-4 mb-2 bg-blue-700 text-white rounded'>
                     <h3 class='text-3xl leading-tight text-yellow-200 font-heading font-semibold'>
-                      GHS
+                      GHS {totalSpent}
                     </h3>
                     <span class='leading-none'>Amount Spent</span>
                   </div>
@@ -86,7 +95,7 @@ const AdminAllOrdersScreen = ({ history }) => {
                 <div class='h-full'>
                   <div class='text-center p-4 mb-2 bg-green-500 text-white rounded'>
                     <h3 class='text-3xl leading-tight  font-heading font-semibold'>
-                      {/* {orders?.length} */} 89
+                      {orders?.length}
                     </h3>
                     <span class='leading-none'>Total Purchased</span>
                   </div>
@@ -96,9 +105,9 @@ const AdminAllOrdersScreen = ({ history }) => {
                 <div class='h-full'>
                   <div class='text-center p-4 mb-2 bg-red-400 text-white rounded'>
                     <h3 class='text-3xl leading-tight  font-heading font-semibold'>
-                      159
+                      GHS 0.0
                     </h3>
-                    <span class='leading-none'>Peding</span>
+                    <span class='leading-none'>Refunds</span>
                   </div>
                 </div>
               </div>

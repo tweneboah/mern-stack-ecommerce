@@ -7,14 +7,42 @@ import Loader from '../components/Loader';
 
 import { updateUserProfileAction } from '../redux/actions/userAction';
 import ErroMessage from '../components/ErroMessage';
+import SuccessMessage from '../components/SuccessMessage';
 
 const EditProfileScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
+  //======
+  //Get the user login details
+  //=======
   const userLogin = useSelector(state => state.userLogin);
   const { loading, error, userInfo } = userLogin;
-  console.log(userInfo);
 
+  //======
+  //GET THE UPDATED USER
+  //=======
+
+  const userUpdatedProfile = useSelector(state => state.userUpdateProfile);
+  console.log(userUpdatedProfile);
+
+  const {
+    loading: userProfileLoading,
+    userInfo: updatedUserInfo,
+    success,
+  } = userUpdatedProfile;
+
+  useEffect(() => {
+    if (success && updatedUserInfo) {
+      setTimeout(() => {
+        history.push('/profile');
+      }, 5000);
+    }
+  });
+  // const {
+  //   loading: userProfileLoading,
+  //   userInfo: updatedUserInfo,
+  //   success,
+  // } = userUpdatedProfile;
   //   useEffect(() => {
   //     if (userInfo) {
   //       history.push(redirect);
@@ -37,9 +65,25 @@ const EditProfileScreen = ({ history, match }) => {
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
                 {loading && <Loader />}
                 {error && <ErroMessage>{error}</ErroMessage>}
+
                 <h2 className='mt-6 text-center text-xl font-extrabold text-gray-900'>
-                  Create new Account
+                  {userInfo && (
+                    <p className='capitalize'>
+                      {userInfo.name} do you want to update your details?
+                    </p>
+                  )}
                 </h2>
+                <p className='text-center'>
+                  {' '}
+                  {success && (
+                    <>
+                      <SuccessMessage>
+                        Successfully Updated. Loing back to see your update
+                      </SuccessMessage>
+                      <p>You will be redirected shortly....😊</p>
+                    </>
+                  )}
+                </p>
                 <svg
                   className='mx-auto h-12 w-auto text-blue-500'
                   xmlns='http://www.w3.org/2000/svg'

@@ -166,7 +166,10 @@ const AdminEditProduct = ({ history, match }) => {
                   </div>
                 </form>
                 <button
-                  onClick={() => dispatch(deleteProductAction(match.params.id))}
+                  onClick={() => {
+                    dispatch(deleteProductAction(match.params.id));
+                    history.push('/admin/fetchproducts');
+                  }}
                   className={` text-white bg-red-800 btn-block py-2 my-3 ${
                     loading && !file && 'disabled'
                   }`}>

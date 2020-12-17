@@ -24,6 +24,12 @@ import AdminAllPayments from './screens/AdminScreens/AdminAllPayments';
 import AdminEditProduct from './screens/AdminScreens/AdminEditProduct';
 import AdminDasboard from './screens/AdminScreens/AdminDasboard';
 import EditProfileScreen from './screens/EditProfileScreen';
+import Contact from './components/Contact';
+import About from './components/About';
+import FileUpload from './components/FileUpload';
+import Team from './components/Team';
+import FashionCategories from './components/Categories/FashionCategories';
+import GentsCategories from './components/Categories/GentsCategories';
 
 const App = () => {
   return (
@@ -32,9 +38,14 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path='/' component={HomeScreen} />
+          <Route exact path='/fashions' component={FashionCategories} />
+          <Route exact path='/gents' component={GentsCategories} />
+          <Route exact path='/team' component={Team} />
           {/* /cart/:id? means the id is optional */}
           <Route exact path='/cart/:id?' component={CartScreen} />
-          <Route exact path='/editProfile/:id?' component={EditProfileScreen} />
+          <Route exact path='/contact' component={Contact} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/editprofile/:id?' component={EditProfileScreen} />
           <Route exact path='/product/:id' component={ProductScreen} />
           <Route exact path='/order/:id' component={OrderScreen} />
           <Route exact path='/login' component={LoginScreen} />

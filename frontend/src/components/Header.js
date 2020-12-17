@@ -11,9 +11,13 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logoutAction());
   };
+  const [openProductMenu, setOpenProductMenu] = useState(false);
 
+  const openProductMenuHandler = () => {
+    setOpenProductMenu(!openProductMenu);
+  };
   const [togle, settogle] = useState(false);
-  const [openMobileMenu, setopenMobileMenu] = useState(false);
+  const [openMobileMenu, setopenMobileMenu] = useState(true);
   return (
     <>
       <nav className='bg-gray-800'>
@@ -88,32 +92,310 @@ const Header = () => {
               </div>
               <div className='hidden sm:block sm:ml-6'>
                 <div className='flex space-x-4'>
-                  <a
-                    href='#'
+                  <Link
+                    to='/about'
                     className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>
-                    Dashboard
-                  </a>
-                  <a
-                    href='#'
+                    About us
+                  </Link>
+
+                  <Link
+                    to='/contact'
+                    className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    Contact
+                  </Link>
+
+                  <Link
+                    to='/'
                     className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
-                    Team
-                  </a>
-                  <a
-                    href='#'
-                    className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
-                    Projects
-                  </a>
-                  <a
-                    href='#'
-                    className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
-                    Calendar
-                  </a>
+                    Products
+                  </Link>
+                  <div class='relative'>
+                    {/* <!-- Item active: "text-white", Item inactive: "text-indigo-300" --> */}
+                    <div className='flex justify-center items-center'>
+                      <Link
+                        to='/products'
+                        onClick={openProductMenuHandler}
+                        type='button'
+                        class='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
+                        <span>Category</span>
+                        {/* <!--
+                  Heroicon name: chevron-down
+
+                  Item active: "text-white", Item inactive: "text-indigo-300"
+                --> */}
+                      </Link>
+                      <svg
+                        onClick={openProductMenuHandler}
+                        class='cursor-pointer ml-2 h-5 w-5 text-indigo-300 group-hover:text-white'
+                        xmlns='http://www.w3.org/2000/svg'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          fill-rule='evenodd'
+                          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                          clip-rule='evenodd'
+                        />
+                      </svg>
+                    </div>
+
+                    {/* <!--
+                'Solutions' flyout menu, show/hide based on flyout menu state.
+
+                Entering: "transition ease-out duration-200"
+                  From: "opacity-0 translate-y-1"
+                  To: "opacity-100 translate-y-0"
+                Leaving: "transition ease-in duration-150"
+                  From: "opacity-100 translate-y-0"
+                  To: "opacity-0 translate-y-1"
+              --> */}
+
+                    {/* DROPDOWN 1 */}
+                    <div
+                      class={`absolute ${
+                        openProductMenu ? 'block' : 'hidden'
+                      } z-10 -ml-4 mt-3 transform w-screen max-w-md px-2 sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2`}>
+                      <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                        {/* Fashion category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative  bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/fashions'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Fashion
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                        {/* Gents category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/d'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Gents
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                        {/* Ladies category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/d'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Ladies
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Hot Deals category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/d'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Hot Deals
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Phone Accessories category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/d'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Phone Accessories
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Laptops and Accessories category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/d'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Laptops and Accessories
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Home Appliances category */}
+                        <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                          <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                            <Link
+                              onClick={() =>
+                                setOpenProductMenu(!openProductMenu)
+                              }
+                              to='/d'
+                              class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                              {/* <!-- Heroicon name: chart-bar --> */}
+                              <svg
+                                class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                aria-hidden='true'>
+                                <path
+                                  stroke-linecap='round'
+                                  stroke-linejoin='round'
+                                  stroke-width='2'
+                                  d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                                />
+                              </svg>
+                              <div class='ml-4'>
+                                <p class='text-base font-medium text-gray-900'>
+                                  Home Appliances
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* END OF DROPDOWN 1 */}
+                  </div>
                 </div>
               </div>
             </div>
             <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
               {userInfo ? (
-                <button className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                <button
+                  onClick={logoutHandler}
+                  className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                   Logout
                 </button>
               ) : (
@@ -134,31 +416,26 @@ const Header = () => {
               <div className='ml-3 relative'>
                 {userInfo && (
                   <div>
-                    {/* Button to click to open dropdown */}
-                    <button
-                      className='bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
-                      id='user-menu'
-                      aria-haspopup='true'>
-                      <span className='sr-only'>Open user menu</span>
-                      <img
-                        onClick={() => settogle(!togle)}
-                        className='h-8 w-8 rounded-full'
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
-                    </button>
+                    {/* Avatar */}
+
+                    <span
+                      class='inline-block relative'
+                      onClick={() => settogle(!togle)}>
+                      <svg
+                        class='h-10 w-10 rounded-full  bg-gray-500 text-gray-300'
+                        fill='currentColor'
+                        viewBox='0 0 24 24'>
+                        <path d='M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z' />
+                      </svg>
+                      <span class='absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400'></span>
+                    </span>
+                    {/* End Avatar */}
                   </div>
                 )}
-                {/* <!--
-            Profile dropdown panel, show/hide based on dropdown state.
+                {/* =============PROFILE DROPWDOWN======= */}
 
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          --> */}
+                {/* Profile dropdown panel, show/hide based on dropdown state. */}
+
                 <div
                   className={`origin-top-right  absolute right-0 mt-2 w-auto rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 ${
                     togle ? 'block transition-all' : 'hidden'
@@ -338,29 +615,280 @@ const Header = () => {
                     </>
                   )}
                 </div>
+                {/* End of profile dropdown */}
               </div>
             </div>
           </div>
         </div>
 
+        {/*============Mobile menu==================== */}
         {/* <!--
     Mobile menu, toggle classNamees based on menu state.
 
     Menu open: "block", Menu closed: "hidden"
   --> */}
+
         <div className={`${openMobileMenu ? 'block' : 'hidden'} md:hidden`}>
           <div className='px-2 pt-2 pb-3 space-y-1'>
             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
             <a
               href='#'
               className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'>
-              Home
+              Homess
             </a>
-            <a
-              href='#'
-              className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'>
-              Products
-            </a>
+
+            <div class='relative '>
+              {/* <!-- Item active: "text-white", Item inactive: "text-indigo-300" --> */}
+              <div className='flex justify-items-start items-center'>
+                <a
+                  onClick={openProductMenuHandler}
+                  type='button'
+                  className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'>
+                  <span>All Products</span>
+                </a>
+                {/* ================================ */}
+                {/* Heroicon name: chevron-down */}
+
+                {/* Item active: "text-white", Item inactive: "text-indigo-300" */}
+                {/* ================================= */}
+                <svg
+                  onClick={openProductMenuHandler}
+                  class='cursor-pointer ml-2 h-5 w-5 text-indigo-300 group-hover:text-white'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                  aria-hidden='true'>
+                  <path
+                    fill-rule='evenodd'
+                    d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                    clip-rule='evenodd'
+                  />
+                </svg>
+                {/* =====END OF HAMBURGER MENU FOR MOBILE===== */}
+              </div>
+
+              {/* 'All products' flyout menu, show/hide based on flyout menu state. */}
+
+              {/* DROPDOWN 1 FOR PRODUCTS */}
+              <div
+                class={`absolute ${
+                  openProductMenu ? 'block' : 'hidden'
+                } z-10 -ml-4 mt-3 transform w-screen max-w-md px-2 sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2`}>
+                {/* Fashion category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative  bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>
+                          Fashion
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                {/* Gents category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>Gents</p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                {/* Ladies category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>
+                          Ladies
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Hot Deals category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>
+                          Hot Deals
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Phone Accessories category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>
+                          Phone Accessories
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Laptops and Accessories category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>
+                          Laptops and Accessories
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Home Appliances category */}
+                <div class='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
+                  <div class='relative bg-white py-1 px-5 grid gap-6 sm:gap-8 sm:p-8'>
+                    <Link
+                      onClick={() => setopenMobileMenu(!openMobileMenu)}
+                      to='/d'
+                      class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
+                      {/* <!-- Heroicon name: chart-bar --> */}
+                      <svg
+                        class='flex-shrink-0 h-6 w-6 text-indigo-600'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        aria-hidden='true'>
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                      <div class='ml-4'>
+                        <p class='text-base font-medium text-gray-900'>
+                          Home Appliances
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              {/* END OF DROPDOWN 1 FOR MOBILE MENU */}
+            </div>
             <a
               href='#'
               className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'>
@@ -369,10 +897,11 @@ const Header = () => {
             <a
               href='#'
               className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'>
-              Contack
+              Contact
             </a>
           </div>
         </div>
+        {/* ==============End of mobile Menu=============== */}
       </nav>
     </>
   );

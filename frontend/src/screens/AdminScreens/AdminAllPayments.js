@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPaymentsAction } from '../../redux/actions/paymentActions';
+import { fetchAllUsersAction } from '../../redux/actions/userAction';
 
-const AdminAllPayments = () => {
+const AdminAllPayments = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -11,27 +12,45 @@ const AdminAllPayments = () => {
 
   const allPayments = useSelector(state => state.allPayments);
   const { loading, error, payments } = allPayments;
+
+  //Get a user if admin
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo && !userInfo.isAdmin) {
+      history.push('/profile');
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
+  }, [userInfo]);
+  //=====
+  //FETCH ALL USERS
+  //============
+  useEffect(() => {
+    dispatch(fetchAllUsersAction());
+  }, [dispatch]);
+
+  //========
+  //GET ALL USERS
+  //==========
+
+  const userList = useSelector(state => state.userList);
+  const { loading: usersLoading, users } = userList;
+
+  //Calculate total orders
+
+  const totalIncome = payments?.reduce((acc, curr) => {
+    console.log(curr);
+    return Number(curr.amountPaid) / 100 + acc;
+  }, 0);
+
   return (
     <>
-      {/* <h1>All Payments</h1>
-      {loading ? (
-        <h1>Loading</h1>
-      ) : (
-        payments?.map(payment => (
-          <div key={payment._id}>
-            <h1>Paid by : {payment.user}</h1>
-            <h1>Amount : {payment.amountPaid / 100}</h1>
-            <h1>Bank : {payment.bank}</h1>
-            <h1>Order Id : {payment.order}</h1>
-            <h1>
-              Last 4 digit of your account :{' '}
-              {payment.lastFourDigitOfYourAccount}
-            </h1>
-            <h1>Payment Reference : {payment.paymentReference}</h1>
-            <hr />
-          </div>
-        ))
-      )} */}
       <div>
         <dl class='mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
           <div class='bg-white overflow-hidden shadow rounded-lg'>
@@ -55,11 +74,11 @@ const AdminAllPayments = () => {
                 </div>
                 <div class='ml-5 w-0 flex-1'>
                   <dt class='text-sm font-medium text-gray-500 truncate'>
-                    Total Subscribers
+                    Total Customers
                   </dt>
                   <dd class='flex items-baseline'>
                     <div class='text-2xl font-semibold text-gray-900'>
-                      71,897
+                      {usersLoading ? <h1>Loading</h1> : users?.length}
                     </div>
 
                     <div class='ml-2 flex items-baseline text-sm font-semibold text-green-600'>
@@ -75,7 +94,7 @@ const AdminAllPayments = () => {
                         />
                       </svg>
                       <span class='sr-only'>Increased by</span>
-                      122
+                      {/* 122 */}
                     </div>
                   </dd>
                 </div>
@@ -102,13 +121,13 @@ const AdminAllPayments = () => {
                     />
                   </svg>
                 </div>
-                <div class='ml-5 w-0 flex-1'>
+                <div class='ml-5 w-auto '>
                   <dt class='text-sm font-medium text-gray-500 truncate'>
-                    Avg. Open Rate
+                    Total Income
                   </dt>
                   <dd class='flex items-baseline'>
                     <div class='text-2xl font-semibold text-gray-900'>
-                      58.16%
+                      GHS {totalIncome}
                     </div>
 
                     <div class='ml-2 flex items-baseline text-sm font-semibold text-green-600'>
