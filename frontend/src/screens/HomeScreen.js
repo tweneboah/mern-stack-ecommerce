@@ -12,8 +12,9 @@ import { fetchAllProductsAction } from '../redux/actions/productActions';
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
+  const [productSearchTerm, setproductSearchTerm] = useState('');
   useEffect(() => {
-    dispatch(fetchAllProductsAction());
+    dispatch(fetchAllProductsAction(productSearchTerm));
   }, [dispatch]);
 
   const productList = useSelector(state => state.productList);
@@ -21,26 +22,9 @@ const HomeScreen = () => {
   const { loading, products, error } = productList;
 
   return (
-    // <>
-    //   <HomeBanner />
-    //   <h1>Latest Products</h1>
-    //   {loading ? (
-    //     <Loader />
-    //   ) : error ? (
-    //     <Message variant='danger'>{error}</Message>
-    //   ) : (
-    //     <>
-    //       <section class='py-4 px-4'>
-    //         <div class='flex flex-wrap -mx-4'>
-    //           {products &&
-    //             products.map(product => <Product product={product} />)}
-    //         </div>
-    //       </section>
-    //     </>
-    //   )}
-    // </>
     <div>
       <HomeBanner />
+
       <div class='relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
@@ -51,7 +35,17 @@ const HomeScreen = () => {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa
               libero labore natus atque, ducimus sed.
             </p>
+
+            <div className='text-center flex justify-center'>
+              <input
+                onChange={e => dispatch(fetchAllProductsAction(e.target.value))}
+                type='text'
+                class='py-2 bg-gray-100 px-3 text-center border shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/4 sm:text-sm border-gray-500 rounded-md'
+                placeholder='Search for product'
+              />
+            </div>
           </div>
+
           <div class='mt-12   grid gap-3 lg:grid-cols-4 lg:max-w-none md:grid-cols-3 sm:grid-cols-2'>
             {/* Card 1 */}
 
