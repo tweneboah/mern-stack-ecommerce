@@ -1,11 +1,19 @@
+import { query } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel';
 const { cloudinary } = require('../config/cloudinary');
 //Get all Products
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
+  console.log(req.query.name);
+  const products = await Product.find({
+    name: { $regex: new RegExp(req.query.name) }, //Partial Search
+  });
+  if (products || products.length === []) {
+    res.json(products);
+  } else {
+    throw new Error('Error occured');
+  }
 });
 
 //Get all Products
@@ -78,12 +86,12 @@ const deleteProductController = expressAsyncHandler(async (req, res) => {
 //==========
 
 const findProductByNameController = expressAsyncHandler(async (req, res) => {
-  // const products = await Product.find({ name: req.query });
-  // if (products || products.length === []) {
-  //   res.json(products);
-  // } else {
-  //   throw new Error('Error occured');
-  // }
+  const products = await Product.find({ name: req.query });
+  if (products || products.length === []) {
+    res.json(products);
+  } else {
+    throw new Error('Error occured');
+  }
 });
 
 export {

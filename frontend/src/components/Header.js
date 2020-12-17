@@ -137,6 +137,14 @@ const Header = () => {
                           clip-rule='evenodd'
                         />
                       </svg>
+                      <input
+                        // onChange={e =>
+                        //   dispatch(fetchAllProductsAction(e.target.value))
+                        // }
+                        type='text'
+                        class='py-2 bg-gray-100 px-3 text-center border shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/4 sm:text-sm border-gray-500 rounded-md'
+                        placeholder='Search for product'
+                      />
                     </div>
 
                     {/* <!--
