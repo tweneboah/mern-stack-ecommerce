@@ -8,7 +8,7 @@ const getProducts = asyncHandler(async (req, res) => {
   console.log(req.query.name);
   const products = await Product.find({
     name: { $regex: new RegExp(req.query.name) }, //Partial Search
-  });
+  }).sort('-createdAt');
   if (products || products.length === []) {
     res.json(products);
   } else {

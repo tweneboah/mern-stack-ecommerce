@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    resetPassworkToken: {
+      type: String,
+    },
+    resetPassworkTokenExpire: {
+      type: Date,
+    },
   },
   {
     toJSON: {
