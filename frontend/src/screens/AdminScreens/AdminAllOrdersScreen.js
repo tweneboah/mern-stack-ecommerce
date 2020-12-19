@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { MdUpdate } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllOrdersAction } from '../../redux/actions/orderActions';
 import { getUserDetailsAction } from '../../redux/actions/userAction';
@@ -76,7 +77,7 @@ const AdminAllOrdersScreen = ({ history }) => {
         ) : (
           <section class='py-8 px-4 min-h-screen'>
             <h2 class='text-3xl mb-2  text-center font-heading font-semibold'>
-              Orders history
+              All Orders history
             </h2>
 
             <div class='flex justify-around flex-wrap -mx-4 mb-8'>
@@ -129,10 +130,13 @@ const AdminAllOrdersScreen = ({ history }) => {
                     Paid
                   </th>
                   <th class='text-center border-t px-2 py-2' scope='col'>
+                    Paid
+                  </th>
+                  <th class='text-left border-t px-2 py-2' scope='col'>
                     Delivered
                   </th>
                   <th class='text-left border-t px-2 py-2' scope='col'>
-                    Action
+                    Update to delivered
                   </th>
                 </tr>
               </thead>
@@ -168,7 +172,7 @@ const AdminAllOrdersScreen = ({ history }) => {
                       )}
                     </td>
                     <td class='text-center border-t px-2 py-2'>
-                      {order.isDelivered ? (
+                      {!order.isDelivered ? (
                         <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-red-500'>
                           Not delivered
                         </span>
@@ -195,13 +199,12 @@ const AdminAllOrdersScreen = ({ history }) => {
                         </svg>
                       </Link> */}
 
-                      <button
+                      <MdUpdate
+                        className='text-3xl text-yellow-800 cursor-pointer ml-8'
                         onClick={() =>
                           history.push(`/admin/updatetoorder/${order._id}`)
                         }
-                        className='bg-green-500 px-2 text-white'>
-                        Update to delivered
-                      </button>
+                      />
                     </td>
                   </tr>
                 ))}

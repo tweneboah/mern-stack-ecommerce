@@ -6,6 +6,8 @@ import {
 } from '../actionTypes/fileUploadActionTypes';
 import {
   USER_DETAILS_FAIL,
+  PASSWORD_RESET_FAIL,
+  PASSWORD_RESET_REQUEST,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_LIST_FAIL,
@@ -21,6 +23,13 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_TOKEN_SENT_REQUEST,
+  PASSWORD_RESET_TOKEN_SENT_SUCCESS,
+  PASSWORD_RESET_TOKEN_SENT_FAIL,
+  PASSWORD_RESET_UPDATE_REQUEST,
+  PASSWORD_RESET_UPDATE_SUCCESS,
+  PASSWORD_RESET_UPDATE_FAIL,
 } from '../actionTypes/userSctionTypes';
 
 //=====================
@@ -191,6 +200,79 @@ export const updateUserProfileAction = (userId, userData) => async (
           : error.message,
     });
   }
+};
+
+//=============
+//RESET PASSWORD
+//===========
+
+export const passwordResetTokenAction = email => {
+  console.log(email);
+  return async dispatch => {
+    try {
+      dispatch({
+        type: PASSWORD_RESET_TOKEN_SENT_REQUEST,
+      });
+
+      const config = {
+        'Content-Type': 'application/json',
+      };
+
+      const updatePassword = await axios.post(
+        '/api/users/reset-password-request-token',
+        {
+          email: email,
+        },
+        config
+      );
+      dispatch({
+        type: PASSWORD_RESET_TOKEN_SENT_SUCCESS,
+        payload: updatePassword,
+      });
+    } catch (error) {
+      dispatch({
+        type: PASSWORD_RESET_TOKEN_SENT_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+//=============
+//RESET PASSWORD
+//===========
+
+export const updateRequestPasswordAction = (newPassword, passwordToken) => {
+  return async dispatch => {
+    try {
+      console.log(newPassword, passwordToken);
+      dispatch({
+        type: PASSWORD_RESET_UPDATE_REQUEST,
+      });
+
+      const config = {
+        'Content-Type': 'application/json',
+      };
+
+      const updatePassword = await axios.post(
+        '/api/users/new-password-reset',
+        {
+          password: newPassword,
+          token: passwordToken,
+        },
+        config
+      );
+      dispatch({
+        type: PASSWORD_RESET_UPDATE_SUCCESS,
+        payload: updatePassword,
+      });
+    } catch (error) {
+      dispatch({
+        type: PASSWORD_RESET_UPDATE_FAIL,
+        payload: error,
+      });
+    }
+  };
 };
 
 //=====================

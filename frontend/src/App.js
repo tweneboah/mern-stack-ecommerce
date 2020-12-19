@@ -30,6 +30,8 @@ import FileUpload from './components/FileUpload';
 import Team from './components/Team';
 import FashionCategories from './components/Categories/FashionCategories';
 import GentsCategories from './components/Categories/GentsCategories';
+import PasswordResetUpdate from './screens/PasswordReset/PasswordResetUpdate';
+import PasswordResetSendToken from './screens/PasswordReset/PasswordResetSendToken';
 
 const App = () => {
   return (
@@ -41,6 +43,17 @@ const App = () => {
           <Route exact path='/fashions' component={FashionCategories} />
           <Route exact path='/gents' component={GentsCategories} />
           <Route exact path='/team' component={Team} />
+          <Route
+            exact
+            path='/new-password-update/:token'
+            component={PasswordResetUpdate}
+          />
+
+          <Route
+            exact
+            path='/password-request-send-token'
+            component={PasswordResetSendToken}
+          />
           {/* /cart/:id? means the id is optional */}
           <Route exact path='/cart/:id?' component={CartScreen} />
           <Route exact path='/contact' component={Contact} />

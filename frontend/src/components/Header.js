@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../redux/actions/userAction';
 import { Link } from 'react-router-dom';
+import { SiShopware } from 'react-icons/si';
+
 const Header = () => {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
@@ -75,32 +77,20 @@ const Header = () => {
               <div className='flex-shrink-0 flex items-center'>
                 {/* Logo */}
                 <Link to='/'>
-                  <svg
-                    className='text-yellow-200   h-8 w-auto'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'>
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4'
-                    />
-                  </svg>
+                  <SiShopware className='text-yellow-500 text-5xl' />
                 </Link>
               </div>
               <div className='hidden sm:block sm:ml-6'>
                 <div className='flex space-x-4'>
                   <Link
                     to='/about'
-                    className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>
-                    About us
+                    className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    About
                   </Link>
 
                   <Link
                     to='/contact'
-                    className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
                     Contact
                   </Link>
 

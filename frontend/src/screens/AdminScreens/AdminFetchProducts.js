@@ -18,7 +18,7 @@ const AdminFetchProducts = ({ history }) => {
   //Fetch all produts
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllProductsAction());
+    dispatch(fetchAllProductsAction(''));
   }, [dispatch]);
 
   const productList = useSelector(state => state.productList);

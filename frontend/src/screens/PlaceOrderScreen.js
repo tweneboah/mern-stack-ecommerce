@@ -184,6 +184,7 @@ const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector(state => state.cart);
   //calculate price
 
+  console.log(cart.cartItems);
   //We want to add additonal property to the cart, in mongoose we will call virtual property because it does not persist in our database
   cart.itemsPrice = cart.cartItems.reduce((acc, item) => {
     return acc + item.price * item.qty;
@@ -212,6 +213,7 @@ const PlaceOrderScreen = ({ history }) => {
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
+        image: '',
       })
     );
   };

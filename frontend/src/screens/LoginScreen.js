@@ -110,7 +110,14 @@ const LoginScreen = ({ location, history }) => {
                               ? `/register?redirect=${redirect}`
                               : '/register'
                           }>
-                          Don't have an account ?
+                          Don't have an account?
+                        </Link>
+                      </div>
+                      <div className='text-sm'>
+                        <Link
+                          className='font-medium text-indigo-600 hover:text-indigo-500'
+                          to={`/password-request-send-token`}>
+                          Forgot Password?
                         </Link>
                       </div>
                     </div>

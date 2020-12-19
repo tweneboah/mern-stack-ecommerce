@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
 
-import {
-  getUserDetailsAction,
-  updateUserProfileAction,
-} from '../redux/actions/userAction';
 import { myOrdersListAction } from '../redux/actions/orderActions';
 
 const ProfileScreen = ({ location, history }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState(null);
-
   const dispatch = useDispatch();
 
   //get the user details
@@ -29,46 +15,27 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
-  //Get the success on update and display message
-  const userUpdateProfile = useSelector(state => state.userUpdateProfile);
-  const { success } = userUpdateProfile;
+  // useEffect(() => {
+  //   dispatch(myOrdersListAction());
+  // }, []);
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
     } else {
       if (user && !user.name) {
-        dispatch(getUserDetailsAction('profile')); //Because we want to get the login user
+        // dispatch(getUserDetailsAction('profile')); //Because we want to get the login user
         dispatch(myOrdersListAction());
       } else {
-        //If there is a user
-        setName(userDetails.userInfo && userDetails.userInfo.name);
-        setEmail(userDetails.userInfo && userDetails.userInfo.email);
       }
     }
   }, [history, userInfo, dispatch, userDetails.userInfo]);
-
-  //dispatch to get orders
-
-  // useEffect(() => {
-  //   dispatch(myOrdersListAction());
-  // }, []);
 
   //get orders from store
 
   const myOrdersList = useSelector(state => state.myOrdersList);
   const { loading: loadingOrders, error: errorOrders, orders } = myOrdersList;
-  //===================
-  //update profile handler
-  //===================
-  const submitHandler = e => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match');
-    } else {
-      // update profile
-      dispatch(updateUserProfileAction({ name, email, password }));
-    }
-  };
+
   //=========
   //Total spent
   const totalSpent = orders?.reduce((acc, curr) => {
@@ -173,12 +140,12 @@ const ProfileScreen = ({ location, history }) => {
                   </td>
                   <td class='text-center border-t px-2 py-2'>
                     {order.isDelivered ? (
-                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-red-500'>
-                        Not delivered
+                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-green-500'>
+                        delivered
                       </span>
                     ) : (
-                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-green-500'>
-                        Delivered
+                      <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-red-500'>
+                        Not Delivered
                       </span>
                     )}
                   </td>
